@@ -8,6 +8,7 @@ import Covid19Cases from '@/components/Covid19Cases'
 import SignUp from '@/components/SignUp'
 import Login from '@/components/Login'
 import AddCase from '@/components/AddCase'
+import Chart from '@/components/Chart'
 
 import Swal from 'sweetalert2'
 
@@ -41,11 +42,16 @@ let router = new Router({
       name: 'AddCase',
       component: AddCase
     },
+    {
+      path: '/chart',
+      name: 'Chart',
+      component: Chart
+    },
   ]
 })
 
 router.beforeEach((to, from, next) => {
-  const publicPages = ['/login', '/signup', '/', '/covid19cases'];
+  const publicPages = ['/login', '/signup', '/', '/covid19cases', '/chart'];
   const authRequired = !publicPages.includes(to.path);
   const loggedIn = localStorage.getItem('token');
 

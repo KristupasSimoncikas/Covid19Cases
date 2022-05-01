@@ -15,13 +15,16 @@
     "axios": "^0.27.2",
     "bootstrap": "^4.0.0",
     "bootstrap-vue": "^2.0.0-rc.11",
+    "chart.js": "^2.7.2",
     "lodash.get": "^4.4.2",
     "lodash.startcase": "^4.4.0",
     "popper.js": "^1.16.1",
     "sweetalert2": "^11.4.9",
     "vue": "^2.5.2",
+    "vue-chartjs": "^3.2.1",
     "vue-functional-data-merge": "^3.1.0",
-    "vue-router": "^3.5.3"
+    "vue-router": "^3.5.3",
+    "vue-simple-search-dropdown": "^1.0.1"
   },
   "devDependencies": {
     "autoprefixer": "^7.1.5",

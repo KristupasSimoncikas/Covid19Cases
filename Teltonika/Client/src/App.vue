@@ -8,11 +8,12 @@
           <b-navbar-nav>
             <b-nav-item to="/covid19cases">Covid-19 Cases</b-nav-item>
             <b-nav-item to="/addcase">Add new record</b-nav-item>
+            <b-nav-item to="/chart">Statistics</b-nav-item>
             <b-nav-item to="/login" v-if="!isLoggedIn">Sign in</b-nav-item>
             <b-nav-item to="/logout" v-if="isLoggedIn">Sign out</b-nav-item>
             <b-nav-item to="/signup" v-if="!isLoggedIn">Sing up</b-nav-item>
             <!--<b-nav-item href="#" @click.prevent="login" v-if="!user">Login</b-nav-item>
-            <b-nav-item href="#" @click.prevent="logout" v-else>Logout</b-nav-item>-->
+  <b-nav-item href="#" @click.prevent="logout" v-else>Logout</b-nav-item>-->
           </b-navbar-nav>
         </b-collapse>
       </b-navbar>
