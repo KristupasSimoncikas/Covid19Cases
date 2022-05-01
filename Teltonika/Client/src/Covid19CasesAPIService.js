@@ -23,6 +23,19 @@ export default {
     if (this.checkValidation(data)) {
 
       return this.execute('post', '/', data)
+        .then(response => {
+        if (response.Id > 0) {
+          Swal.fire("Successfully reported about new Covid-19 case")
+        }
+        else {
+          Swal.fire("Unexpected error. Please try again.")
+        }
+      })
+        .catch(error => {
+          if (error.reponse) {
+            Swal.fire(error.response.data)
+          }
+        });
     }
   },
   checkValidation(data) {

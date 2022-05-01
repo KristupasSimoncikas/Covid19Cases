@@ -33,7 +33,6 @@
       };
     },
     methods: {
-
       async createRecord() {
         await api.create(this.model)
       },

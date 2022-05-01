@@ -12,8 +12,6 @@
             <b-nav-item to="/login" v-if="!isLoggedIn">Sign in</b-nav-item>
             <b-nav-item to="/logout" v-if="isLoggedIn">Sign out</b-nav-item>
             <b-nav-item to="/signup" v-if="!isLoggedIn">Sing up</b-nav-item>
-            <!--<b-nav-item href="#" @click.prevent="login" v-if="!user">Login</b-nav-item>
-  <b-nav-item href="#" @click.prevent="logout" v-else>Logout</b-nav-item>-->
           </b-navbar-nav>
         </b-collapse>
       </b-navbar>
@@ -38,17 +36,10 @@
     },
     methods: {
       login() {
-        vm.$forceUpdate();
-        //or in file components
         this.$forceUpdate();
-
-        //  Assuming Django writes username to localStorage
       },
       logout() {
-
         windowlocalStorage.removeItem("token");
-        vm.$forceUpdate();
-        //or in file components
         this.$forceUpdate();
       }
     }

@@ -13,7 +13,6 @@ using Teltonika.DBContext;
 using Teltonika.Hubs;
 using Teltonika.Interfaces;
 using Teltonika.Services;
-using VueCliMiddleware;
 
 namespace Teltonika
 {

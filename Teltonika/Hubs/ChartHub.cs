@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.SignalR;
 using System.Threading.Tasks;
-using Teltonika.Interfaces;
 
 namespace Teltonika.Hubs
 {

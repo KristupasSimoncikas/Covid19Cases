@@ -1,20 +1,9 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SignalR;
-using Microsoft.Data.SqlClient;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
-using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Linq;
-using System.Text.Json;
 using System.Threading.Tasks;
 using Teltonika.DataModels;
-using Teltonika.DBContext;
 using Teltonika.Hubs;
 using Teltonika.Interfaces;
-using Teltonika.Services;
 
 namespace Teltonika.Controllers
 {

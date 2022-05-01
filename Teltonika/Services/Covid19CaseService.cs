@@ -1,11 +1,11 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Teltonika.DataModels;
 using Teltonika.DBContext;
 using Teltonika.Interfaces;
+using Teltonika.Models;
 
 namespace Teltonika.Services
 {
@@ -49,7 +49,7 @@ namespace Teltonika.Services
 
         public async Task DeleteCovid19Case(int id)
         {
-            var ccToRemove= await _context.Covid19Cases.SingleOrDefaultAsync(r => r.Id == id);
+            var ccToRemove = await _context.Covid19Cases.SingleOrDefaultAsync(r => r.Id == id);
             if (ccToRemove != null)
             {
                 _context.Covid19Cases.Remove(ccToRemove);
@@ -62,12 +62,6 @@ namespace Teltonika.Services
             return await _context.Covid19Cases
                 .Where(r => r.Id == id)
                 .SingleOrDefaultAsync();
-        }
-
-        public class ChartData
-        {
-            public string Group { get; set; }
-            public int Count { get; set; }
         }
 
         // Chart data
@@ -85,7 +79,7 @@ namespace Teltonika.Services
                         Count = g.Count()
                     })
                     .ToListAsync();
-           
+
         }
         public async Task<IEnumerable<ChartData>> GetGenderData()
         {

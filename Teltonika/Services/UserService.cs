@@ -37,9 +37,10 @@ namespace Teltonika.Services
                 .SingleOrDefaultAsync();
         }
 
-        public Task<List<User>> Gets()
+        public async Task<User> GetByUsername(string username)
         {
-            throw new NotImplementedException();
+            return await _context.Users
+                .Where(r => r.Username == username).FirstOrDefaultAsync();
         }
 
         public async Task Save(User user)

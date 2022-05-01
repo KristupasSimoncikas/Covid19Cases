@@ -139,18 +139,7 @@
           this.totalRows = this.records.length
         }
       },
-      async updateRecord(record) {
-        // We use Object.assign() to create a new (separate) instance
-        this.model = Object.assign({}, record)
-      },
       async createRecord() {
-        const isUpdate = !!this.model.id;
-
-        if (isUpdate) {
-          await api.update(this.model.id, this.model)
-        } else {
-          await api.create(this.model)
-        }
 
         // Clear the data inside of the form
         this.model = {}
@@ -158,17 +147,6 @@
         // Fetch all records again to have latest data
         await this.getAll()
       },
-      async deleteRecord(id) {
-        if (confirm('Are you sure you want to delete this record?')) {
-          // if we are editing a record we deleted, remove it from the form
-          if (this.model.id === id) {
-            this.model = {}
-          }
-
-          await api.delete(id)
-          await this.getAll()
-        }
-      }
     }
   }
 </script>

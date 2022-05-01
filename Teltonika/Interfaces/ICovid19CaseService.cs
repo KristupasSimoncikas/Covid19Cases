@@ -1,8 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using Teltonika.DataModels;
+using Teltonika.Models;
 using static Teltonika.Services.Covid19CaseService;
 
 namespace Teltonika.Interfaces

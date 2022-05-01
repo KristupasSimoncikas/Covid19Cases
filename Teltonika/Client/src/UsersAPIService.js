@@ -1,4 +1,3 @@
-import Vue from 'vue'
 import axios from 'axios'
 import Swal from 'sweetalert2'
 import router from './router'
@@ -41,9 +40,9 @@ export default {
     }
   },
   get(data) {
+    var successfulLogin = false
     if (this.checkValidationLogin(data)) {
-      var successfulLogin = false
-      const response = axios.get("http://localhost:39710/api/Users/Signin/" + data.username + "/" + data.password)
+      axios.get("http://localhost:39710/api/Users/Signin/" + data.username + "/" + data.password)
         .then(response => {
           if (response.status == 200) {
             localStorage.setItem('token', JSON.stringify(response.data.token));
@@ -74,19 +73,34 @@ export default {
     }
     return true;
   },
-  checkValidationSignup(data) {
+  async checkValidationSignup(data) {
     if (!data.fullname) {
       Swal.fire("Enter password")
       return
     }
-    if (!data.username) {
+    else if (!data.username) {
       Swal.fire("Enter username")
       return
     }
-    if (!data.password) {
+    else if (!data.password) {
       Swal.fire("Enter password")
       return
     }
+
+    await axios.get("http://localhost:39710/api/Users/CheckUsername/" + data.username)
+      .then(response => {
+        if (response.status == 200) {
+          Swal.fire("User with provided username already exists")
+          return false
+        }
+        response => response
+      })
+      .catch(error => {
+        if (error.reponse) {
+          Swal.fire(error.response.data)
+        }
+      })
+
     return true;
   },
 }

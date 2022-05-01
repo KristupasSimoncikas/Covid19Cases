@@ -52,25 +52,6 @@ namespace Teltonika.Controllers
             }
         }
 
-        private string GenerateJSONWebToken(User userInfo)
-        {
-            var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["Jwt:Key"]));
-            var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
-
-            var token = new JwtSecurityToken(_config["Jwt:Issuer"],
-              _config["Jwt:Issuer"],
-              null,
-              expires: DateTime.Now.AddMinutes(120),
-              signingCredentials: credentials);
-
-            return new JwtSecurityTokenHandler().WriteToken(token);
-        }
-
-        public async Task<User> AuthenticateUser(User user)
-        {
-            return await _userService.GetByUsernamePassword(user);
-        }
-
         [HttpGet("{id}")]
         public async Task<ActionResult<User>> Get(int id)
         {
@@ -93,5 +74,46 @@ namespace Teltonika.Controllers
             await _userService.Save(user);
             return Ok(user);
         }
+
+        [HttpGet]
+        [Route("CheckUsername/{username}")]
+        public async Task<IActionResult> UserExists(string username)
+        {
+            try
+            {
+                var user = await _userService.GetByUsername(username);
+
+                if (user == null)
+                {
+                    return StatusCode((int)HttpStatusCode.NotFound, "Invalid user");
+                }
+
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return StatusCode((int)HttpStatusCode.InternalServerError, ex.Message);
+            }
+        }
+
+        private string GenerateJSONWebToken(User userInfo)
+        {
+            var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["Jwt:Key"]));
+            var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
+
+            var token = new JwtSecurityToken(_config["Jwt:Issuer"],
+              _config["Jwt:Issuer"],
+              null,
+              expires: DateTime.Now.AddMinutes(120),
+              signingCredentials: credentials);
+
+            return new JwtSecurityTokenHandler().WriteToken(token);
+        }
+
+        public async Task<User> AuthenticateUser(User user)
+        {
+            return await _userService.GetByUsernamePassword(user);
+        }
+
     }
 }
