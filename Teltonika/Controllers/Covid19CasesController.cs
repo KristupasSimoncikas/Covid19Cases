@@ -82,5 +82,35 @@ namespace Teltonika.Controllers
             await _covid19CaseService.DeleteCovid19Case(id);
             return NoContent();
         }
+
+        //Chart data api
+
+        [HttpGet]
+        [Route("AgeBracket/")]
+        public async Task<IActionResult> GetAgeBracketData()
+        {
+            return Ok(await _covid19CaseService.GetAgeBracketData());
+        }
+
+        [HttpGet]
+        [Route("Gender/")]
+        public async Task<IActionResult> GetGenderData()
+        {
+            return Ok(await _covid19CaseService.GetGenderData());
+        }
+
+        [HttpGet]
+        [Route("Municipality/")]
+        public async Task<IActionResult> GetMunicipalityData()
+        {
+            return Ok(await _covid19CaseService.GetMunicipalityData());
+        }
+
+        [HttpGet]
+        [Route("ConfirmationDate/")]
+        public async Task<IActionResult> GetConfirmationDateData()
+        {
+            return Ok(await _covid19CaseService.GetConfirmationDateData());
+        }
     }
 }
