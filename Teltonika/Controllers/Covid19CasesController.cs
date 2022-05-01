@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.SignalR;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -11,6 +12,7 @@ using System.Text.Json;
 using System.Threading.Tasks;
 using Teltonika.DataModels;
 using Teltonika.DBContext;
+using Teltonika.Hubs;
 using Teltonika.Interfaces;
 using Teltonika.Services;
 
@@ -21,10 +23,12 @@ namespace Teltonika.Controllers
     public class Covid19CasesController : ControllerBase
     {
         private readonly ICovid19CaseService _covid19CaseService;
+        private readonly IHubContext<ChartHub> _hubContext;
 
-        public Covid19CasesController(ICovid19CaseService covid19CaseService)
+        public Covid19CasesController(ICovid19CaseService covid19CaseService, IHubContext<ChartHub> chartHub)
         {
             _covid19CaseService = covid19CaseService;
+            _hubContext = chartHub;
         }
 
         [HttpGet]
@@ -53,6 +57,10 @@ namespace Teltonika.Controllers
                 return BadRequest();
             }
             await _covid19CaseService.AddCovid19Case(covidCase);
+            await _hubContext
+                    .Clients
+                    .All
+                    .SendAsync("statistics-changed", "");
             return Ok(covidCase);
         }
 
@@ -83,8 +91,7 @@ namespace Teltonika.Controllers
             return NoContent();
         }
 
-        //Chart data api
-
+        //Chart data API
         [HttpGet]
         [Route("AgeBracket/")]
         public async Task<IActionResult> GetAgeBracketData()

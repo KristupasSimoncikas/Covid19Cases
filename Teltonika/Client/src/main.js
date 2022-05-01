@@ -7,8 +7,9 @@ import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 import App from './App'
 import router from './router'
+import ChartHub from './chart-hub'
 Vue.use(BootstrapVue)
-
+Vue.use(ChartHub)
 Vue.config.productionTip = false
 
 /* eslint-disable no-new */

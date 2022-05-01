@@ -10,6 +10,7 @@ using Newtonsoft.Json.Serialization;
 using System.IO;
 using System.Text;
 using Teltonika.DBContext;
+using Teltonika.Hubs;
 using Teltonika.Interfaces;
 using Teltonika.Services;
 using VueCliMiddleware;
@@ -32,6 +33,8 @@ namespace Teltonika
                .SetBasePath(Directory.GetCurrentDirectory())
                .AddJsonFile("appsettings.json")
                .Build();
+
+            services.AddSignalR();
 
             services.AddDbContext<Context>(options =>
                 options.UseSqlServer(
@@ -103,25 +106,17 @@ namespace Teltonika
             app.UseSpaStaticFiles();
             app.UseAuthorization();
 
+            app.UseSignalR(route =>
+            {
+                route.MapHub<ChartHub>("/charthub");
+            });
+
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
             });
 
             app.UseAuthentication();
-
-            //app.UseSpa(spa =>
-            //{
-            //    if (env.IsDevelopment())
-            //    {
-            //        spa.Options.SourcePath = "Client/";
-            //        spa.UseVueCli(npmScript: "serve");
-            //    }
-            //    else
-            //    {
-            //        spa.Options.SourcePath = "dist";
-            //    }    
-            //});
         }
     }
 }

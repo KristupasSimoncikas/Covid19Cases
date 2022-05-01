@@ -27,15 +27,37 @@
       return {
         chartData: null,
         key: "1",
-        chartLabel: "Age group"
+        chartLabel: "Age bracket"
       };
     },
+    created() {
+      // Listen to score changes coming from SignalR events
+      this.$chartHub.$on('statistics-changed', this.onStatisticsChanged)
+    },
+    beforeDestroy() {
+      // Make sure to cleanup SignalR event handlers when removing the component
+      this.$chartHub.$off('statistics-changed', this.onStatisticsChanged)
+    },
     methods: {
+      onStatisticsChanged() {
+        this.onChange(null)
+      },
       onChange(event) {
-        switch (event.target.value) {
+        //If method was called as button event
+        if (event != null) {
+          this.key = event.target.value
+          this.filterChanged(event.target.value)
+        }
+        //If method was called manually to get latest data
+        else {
+          this.filterChanged(this.key)
+        }
+      },
+      filterChanged(val){
+        switch (val) {
           case "1":
             this.getChartData('AgeBracket');
-            this.chartLabel = "Age group"
+            this.chartLabel = "Age bracket"
             break;
           case "2":
             this.getChartData('Gender');
@@ -43,9 +65,11 @@
             break;
           case "3":
             this.getChartData('Municipality');
+            this.chartLabel = "Municipality"
             break;
           case "4":
             this.getChartData('ConfirmationDate');
+            this.chartLabel = "ConfirmationDate"
             break;
           default:
             break
