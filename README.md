@@ -6,8 +6,8 @@ Covid-19 cases management application
 ## Build
 
 ``` bash
-cd Teltonika\Client
 # To host front-end
+cd Teltonika\Client
 npm run dev
 # To host back-end
 Don't forget to change database connection string in application.json
