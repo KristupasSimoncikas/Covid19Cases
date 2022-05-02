@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1 class="h1">Lastest one-hundred Covid-19 cases</h1>
+    <h1 class="h1">Latest one-hundred Covid-19 cases</h1>
     <div id="app" class="vue-tempalte" align="center">
       <reactive-bar-chart :chart-data="chartData" style="width: 500px; height:500px"></reactive-bar-chart>
     </div>

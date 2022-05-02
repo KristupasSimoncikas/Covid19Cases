@@ -17,9 +17,9 @@ export default {
       return req.data
     })
   },
-
   create(data) {
-    if (this.checkValidationSignup(data)) {
+    var valid = this.checkValidationSignup(data)
+    if (valid) {
       this.execute('post', '/', data)
         .then(response => {
           if (response.Id > 0) {
@@ -33,11 +33,15 @@ export default {
           }
         })
         .catch(error => {
+          if (error.response.status == 403) {
+            Swal.fire("User with provided username already exists")
+          }
           if (error.reponse) {
             Swal.fire(error.response.data)
           }
         });
     }
+    this.data = {}
   },
   get(data) {
     var successfulLogin = false
@@ -73,34 +77,20 @@ export default {
     }
     return true;
   },
-  async checkValidationSignup(data) {
+  checkValidationSignup(data) {
     if (!data.fullname) {
       Swal.fire("Enter password")
-      return
+      return false
     }
     else if (!data.username) {
       Swal.fire("Enter username")
-      return
+      return false
     }
     else if (!data.password) {
       Swal.fire("Enter password")
-      return
+      return false
     }
 
-    await axios.get("http://localhost:39710/api/Users/CheckUsername/" + data.username)
-      .then(response => {
-        if (response.status == 200) {
-          Swal.fire("User with provided username already exists")
-          return false
-        }
-        response => response
-      })
-      .catch(error => {
-        if (error.reponse) {
-          Swal.fire(error.response.data)
-        }
-      })
-
-    return true;
+    return true
   },
 }

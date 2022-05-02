@@ -30,6 +30,7 @@ namespace Teltonika.Controllers
         {
             try
             {
+
                 User model = new User()
                 {
                     Username = username,
@@ -55,40 +56,40 @@ namespace Teltonika.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<User>> Get(int id)
         {
-            var item = await _userService.Get(id);
-            if (item == null)
+            try
             {
-                return NotFound();
-            }
+                var item = await _userService.Get(id);
+                if (item == null)
+                {
+                    return NotFound();
+                }
 
-            return Ok(item);
+                return Ok(item);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode((int)HttpStatusCode.InternalServerError, ex.Message);
+            }
         }
 
         [HttpPost]
         public async Task<ActionResult<User>> Create(User user)
         {
-            if (user == null)
-            {
-                return BadRequest();
-            }
-            await _userService.Save(user);
-            return Ok(user);
-        }
-
-        [HttpGet]
-        [Route("CheckUsername/{username}")]
-        public async Task<IActionResult> UserExists(string username)
-        {
             try
             {
-                var user = await _userService.GetByUsername(username);
+                var exists = await _userService.GetByUsername(user.Username);
+
+                if (exists != null)
+                {
+                    return StatusCode((int)HttpStatusCode.Forbidden);
+                }
 
                 if (user == null)
                 {
-                    return StatusCode((int)HttpStatusCode.NotFound, "Invalid user");
+                    return BadRequest();
                 }
-
-                return Ok();
+                await _userService.Save(user);
+                return Ok(user);
             }
             catch (Exception ex)
             {
