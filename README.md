@@ -19,7 +19,7 @@ Make sure applications runs on http://localhost:39710/
 ![alt text](https://user-images.githubusercontent.com/104672380/166165746-6c06383a-7df3-4fd8-b91b-d8d6b2e30d16.png)
 # Datatable with filters and pagination 
 ![image](https://user-images.githubusercontent.com/104672380/166190527-66f42ade-2cfb-47d9-8337-fa61da41ec0d.png)
-# Add new data page with validations (not accessible for unauthorized users)
+# Add new data with validations (not accessible for unauthorized users)
 ![alt text](https://user-images.githubusercontent.com/104672380/166165882-739e52a8-867b-4111-8c25-186960ba134d.png)
 ![alt text](https://user-images.githubusercontent.com/104672380/166165890-41d43104-8526-4d3a-aaf2-eb0c120f0c57.png)
 ![alt text](https://user-images.githubusercontent.com/104672380/166165895-760d113c-03bd-4bd3-97db-dd22bcc742b7.png)
