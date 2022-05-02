@@ -24,7 +24,7 @@ Make sure applications runs on http://localhost:39710/
 ![alt text](https://user-images.githubusercontent.com/104672380/166165890-41d43104-8526-4d3a-aaf2-eb0c120f0c57.png)
 ![alt text](https://user-images.githubusercontent.com/104672380/166165895-760d113c-03bd-4bd3-97db-dd22bcc742b7.png)
 # Live data rendering chart (SignalR)
-![alt text](https://user-images.githubusercontent.com/104672380/166187831-5e25d74c-94e4-44a3-b54e-a533af1a3b7a.png
+![alt text](https://user-images.githubusercontent.com/104672380/166187831-5e25d74c-94e4-44a3-b54e-a533af1a3b7a.png)
 # Login, Logout, Register
 ![alt text](https://user-images.githubusercontent.com/104672380/166165944-640290b3-8882-407e-ae41-98e6e9b3ff95.png)
 ![alt text](https://user-images.githubusercontent.com/104672380/166165954-58d759b4-4042-404a-ae7e-cbf14c2e1432.png)
