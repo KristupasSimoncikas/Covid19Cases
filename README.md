@@ -10,7 +10,7 @@ cd Teltonika\Client
 # To host front-end
 npm run dev
 # To host back-end
-Don't forget to change database connections settings in application.json
+Don't forget to change database connection string in application.json
 Make sure applications runs on http://localhost:39710/
 ```
 
